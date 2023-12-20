@@ -22,10 +22,24 @@ const getAllRecettes = (req,res) => {
 })
 }
 
+const getOneRecetteById = (req, res) => {
+    const recetteId = req.params.id;
+    recette.findOne({ _id: recetteId }, (err, answer) => {
+        if (err) {
+            res.send(err);
+        } else {
+            res.send(answer);
+        }
+    });
+}
+
+
+
 
 
 
 module.exports = {
     addNewRecette,
     getAllRecettes,
+    getOneRecetteById,
 };

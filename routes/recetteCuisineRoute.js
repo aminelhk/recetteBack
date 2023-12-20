@@ -4,7 +4,7 @@ const Recette = require('../models/recette');
 
 
 const router = express.Router();
-const {addNewRecette} = require('../controllers/recetteCuisine');
+const {addNewRecette,getAllRecettes,getOneRecetteById} = require('../controllers/recetteCuisine');
 
 //Create a new recipe
 //router.post('/recette', addNewRecette)
@@ -25,6 +25,17 @@ router.post('/recette', async (req, res) => {
 router.get ('/recette', async(req, res) =>{
     try {
         const recettes = await Recette.find({});
+        res.send(recettes);
+    } catch (error) {
+        console.error(error);
+        res.status(500).send(error);
+    }
+});
+
+router.get ('/recetteDetail', async(req, res) =>{
+    try {
+        const {id} = req.body;
+        const recettes = await Recette.findById(id);
         res.send(recettes);
     } catch (error) {
         console.error(error);
