@@ -32,9 +32,9 @@ router.get ('/recette', async(req, res) =>{
     }
 });
 
-router.get ('/recetteDetail', async(req, res) =>{
+router.get ('/recetteDetail/:id', async(req, res) =>{
     try {
-        const {id} = req.body;
+        const {id} = req.params;
         const recettes = await Recette.findById(id);
         res.send(recettes);
     } catch (error) {
